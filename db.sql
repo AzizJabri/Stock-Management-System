@@ -34,7 +34,8 @@ CREATE TABLE customer (
                           id INT PRIMARY KEY AUTO_INCREMENT,
                           name VARCHAR(255) NOT NULL,
                           phone VARCHAR(20),
-                          address TEXT
+                          address TEXT,
+                          FOREIGN KEY (id) REFERENCES `user`(id) ON DELETE CASCADE
 );
 
 -- Order Table
