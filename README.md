@@ -12,7 +12,7 @@ A simple stock management system built with java.
 [TODO]
 
 ## 📦 Database Structure
-[!Database Structure](/db_schema.png)
+![Database Structure](/db_schema.png)
 
 ## ⚡ How to Run
 1. Clone the repository:
