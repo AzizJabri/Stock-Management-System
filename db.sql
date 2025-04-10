@@ -32,8 +32,7 @@ CREATE TABLE product (
 -- Customer Table
 CREATE TABLE customer (
                           id INT PRIMARY KEY AUTO_INCREMENT,
-                          name VARCHAR(255) NOT NULL,
-                          phone VARCHAR(20),
+                          email VARCHAR(255) NOT NULL,
                           address TEXT,
                           FOREIGN KEY (id) REFERENCES `user`(id) ON DELETE CASCADE
 );

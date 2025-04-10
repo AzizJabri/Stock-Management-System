@@ -45,10 +45,7 @@ public class AdminController {
         try {
             Admin admin = adminService.getByUsername(username);
             if (admin != null && PasswordUtils.verifyPassword(password, admin.getPassword())) {
-                System.out.println("Login successful.");
                 return admin;
-            } else {
-                System.out.println("Invalid credentials.");
             }
         } catch (Exception e) {
             System.out.println("Error while logging in: " + e.getMessage());
