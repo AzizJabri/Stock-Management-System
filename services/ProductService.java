@@ -1,11 +1,12 @@
 package services;
 
+import interfaces.IProductService;
 import models.Product;
 import repositories.ProductRepository;
 
 import java.util.ArrayList;
 
-public class ProductService {
+public class ProductService implements IProductService {
     private static ProductService instance;
     private final ProductRepository productRepository;
 
