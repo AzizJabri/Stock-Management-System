@@ -39,7 +39,7 @@ public class SupplierController {
         return supplierService.getSupplierById(id);
     }
 
-    public ArrayList<Supplier> listCategories() {
+    public ArrayList<Supplier> listSuppliers() {
         return supplierService.listSuppliers();
     }
 }
