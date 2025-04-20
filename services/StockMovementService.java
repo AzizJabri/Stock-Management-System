@@ -2,6 +2,7 @@ package services;
 
 import interfaces.IStockMovementService;
 import models.StockMovement;
+import repositories.ProductRepository;
 import repositories.StockMovementRepository;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,8 +11,11 @@ public class StockMovementService implements IStockMovementService {
     private static StockMovementService instance;
     private final StockMovementRepository stockMovementRepository;
 
+    private final ProductRepository productRepository;
+
     private StockMovementService() {
         this.stockMovementRepository = StockMovementRepository.getInstance();
+        this.productRepository = ProductRepository.getInstance();
     }
 
     public static StockMovementService getInstance() {
@@ -24,6 +28,11 @@ public class StockMovementService implements IStockMovementService {
     @Override
     public void addStockMovement(int productId, int quantity, String movementType, String reference) {
         try {
+            // Check if product exists
+            if (productRepository.getById(productId) == null) {
+                System.out.println("Product not found");
+                return;
+            }
             StockMovement movement = new StockMovement(productId, quantity, movementType, new Date(), reference);
             stockMovementRepository.save(movement);
         } catch (Exception e) {
@@ -34,6 +43,11 @@ public class StockMovementService implements IStockMovementService {
     @Override
     public void updateStockMovement(StockMovement stockMovement) {
         try {
+            // Check if product exists
+            if (productRepository.getById(stockMovement.getProduct_id()) == null) {
+                System.out.println("Product not found");
+                return;
+            }
             stockMovementRepository.update(stockMovement);
         } catch (Exception e) {
             System.out.println("Error updating stock movement: " + e.getMessage());

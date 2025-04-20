@@ -1,6 +1,7 @@
 package services;
 
 import interfaces.IOrderService;
+import models.Customer;
 import models.Order;
 import repositories.OrderRepository;
 
@@ -11,8 +12,11 @@ public class OrderService implements IOrderService {
     private static OrderService instance;
     private final OrderRepository orderRepository;
 
+    private final CustomerRepository customerRepository;
+
     private OrderService() {
         this.orderRepository = OrderRepository.getInstance();
+        this.customerRepository = CustomerRepository.getInstance();
     }
 
     public static OrderService getInstance() {
@@ -25,6 +29,12 @@ public class OrderService implements IOrderService {
     @Override
     public void addOrder(int customerId, Date orderDate, String status, double totalAmount) {
         try {
+            // Check if customer exists
+            Customer customer = customerRepository.getById(customerId);
+            if (customer == null) {
+                System.out.println("Customer not found");
+                return;
+            }
             Order order = new Order(customerId, orderDate, status, totalAmount);
             orderRepository.save(order);
         } catch (Exception e) {
@@ -35,6 +45,12 @@ public class OrderService implements IOrderService {
     @Override
     public void updateOrder(Order order) {
         try {
+            // Check if customer exists
+            Customer customer = customerRepository.getById(order.getCustomerId());
+            if (customer == null) {
+                System.out.println("Customer not found");
+                return;
+            }
             orderRepository.update(order);
         } catch (Exception e) {
             System.out.println("Error updating Order: " + e.getMessage());
