@@ -86,24 +86,25 @@ public class AdminRepository {
     }
 
     public Admin getById(int id) throws SQLException {
-        String sql = "SELECT a.*, u.full_name, u.age, u.phone_number FROM admin a JOIN user u ON a.id = u.id WHERE a.id = ?";
+            String sql = "SELECT a.*, u.full_name, u.age, u.phone_number FROM admin a JOIN user u ON a.id = u.id WHERE a.id = ?";
 
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            if (rs.next()) {
-                return new Admin(
-                        rs.getInt("id"),
-                        rs.getString("full_name"),
-                        rs.getInt("age"),
-                        Integer.parseInt(rs.getString("phone_number")),
-                        rs.getString("username"),
-                        rs.getString("password")
-                );
-
+            try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        return new Admin(
+                                rs.getInt("id"),
+                                rs.getString("full_name"),
+                                rs.getInt("age"),
+                                Integer.parseInt(rs.getString("phone_number")),
+                                rs.getString("username"),
+                                rs.getString("password")
+                        );
+                    }
+                }
             }
+            return null;
         }
-        return null;
-    }
 
     public void update(Admin existingAdmin) throws SQLException {
         String sql = "UPDATE admin SET username = ?, password = ? WHERE id = ?";
