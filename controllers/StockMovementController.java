@@ -43,13 +43,9 @@ public class StockMovementController {
     }
 
     public void updateMovement() {
-        System.out.println("Enter StockMovement ID to update :");
-        int id = Integer.parseInt(scanner.nextLine());
-        StockMovement movement = stockMovementService.getStockMovementById(id);
-        if (movement == null){
-            System.out.println(
-                    "StockMovement not found"
-            );
+        StockMovement movement = getMovementDetails();
+        if (movement == null) {
+            System.out.println("StockMovement not found");
             return;
         }
         System.out.println("Entrer StockMovement productId: ");
@@ -64,32 +60,40 @@ public class StockMovementController {
     }
 
     public void removeMovement() {
-        System.out.println("Enter StockMovement ID to delete :");
-        int movementId = Integer.parseInt(scanner.nextLine());
-        StockMovement movement = stockMovementService.getStockMovementById(movementId);
-        if (movement == null){
-            System.out.println(
-                    "StockMovement not found"
-            );
+        StockMovement movement = getMovementDetails();
+        if (movement == null) {
+            System.out.println("StockMovement not found");
             return;
         }
-        stockMovementService.deleteStockMovement(movementId);
+        stockMovementService.deleteStockMovement(movement.getId());
     }
 
     public StockMovement getMovementDetails() {
         System.out.println("Enter StockMovement ID to delete :");
         int movementId = Integer.parseInt(scanner.nextLine());
         StockMovement movement = stockMovementService.getStockMovementById(movementId);
-        if (movement == null){
-            System.out.println(
-                    "StockMovement not found"
-            );
+        if (movement == null) {
+            System.out.println("StockMovement not found");
             return null;
-
+        }
         return stockMovementService.getStockMovementById(movementId);
+
     }
 
-    public ArrayList<StockMovement> getAllMovements() {
-        return stockMovementService.listAllStockMovements();
+    public void getAllMovements() {
+        ArrayList<StockMovement> movements = stockMovementService.listAllStockMovements();
+        if (movements.isEmpty()) {
+            System.out.println("No stock movements found.");
+        } else {
+            for (StockMovement movement : movements) {
+                System.out.println("ID: " + movement.getId());
+                System.out.println("Product ID: " + movement.getProduct_id());
+                System.out.println("Quantity: " + movement.getQuantity());
+                System.out.println("Movement Type: " + movement.getMovement_type());
+                System.out.println("Date: " + movement.getDate());
+                System.out.println("Reference: " + movement.getReference());
+                System.out.println("------------------------------");
+            }
+        }
     }
 }

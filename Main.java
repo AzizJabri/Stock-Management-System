@@ -1,9 +1,7 @@
 
-import controllers.CategoryController;
-import controllers.ProductController;
-import controllers.SupplierController;
+import controllers.*;
 import models.Admin;
-import controllers.AdminController;
+import models.StockMovement;
 import utils.DisplayUtils;
 
 import java.util.Scanner;
@@ -21,6 +19,7 @@ public class Main {
         CategoryController categoryController = CategoryController.getInstance();
         ProductController productController = ProductController.getInstance();
         SupplierController supplierController = SupplierController.getInstance();
+        StockMovementController stockMovementController = StockMovementController.getInstance();
         Admin admin = null;
 
         while (admin == null) {
@@ -38,7 +37,7 @@ public class Main {
         int choice = 0;
         int sub_choice = 0;
         while (choice > 8 || choice < 1) {
-            DisplayUtils.diplayAdminDashboard(admin);
+            DisplayUtils.displayAdminDashboard(admin);
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice){
                 case 1:
@@ -94,7 +93,7 @@ public class Main {
                     }
                     break;
                 case 3:
-                 while (sub_choice != 5) {
+                    while (sub_choice != 5) {
                         DisplayUtils.displayManageSuppliersMenu();
                         sub_choice = Integer.parseInt(scanner.nextLine());
                         switch (sub_choice) {
@@ -111,6 +110,12 @@ public class Main {
                                 break;
                             case 4:
                                 supplierController.listSuppliers();
+                                break;
+                            case 5:
+                                break;
+                            default:
+                                System.out.println("Invalid choice. Please try again.");
+                        }
                     }
                     break;
                 case 4:
@@ -123,7 +128,30 @@ public class Main {
                     DisplayUtils.displayManageCustomersMenu();
                     break;
                 case 7:
-                    DisplayUtils.displayManageStockMovementsMenu();
+                    while (sub_choice != 5) {
+                        DisplayUtils.displayManageStockMovementsMenu();
+                        sub_choice = Integer.parseInt(scanner.nextLine());
+                        switch (sub_choice) {
+                            case 1:
+                                stockMovementController.recordMovement();
+                                break;
+                            case 2:
+                                stockMovementController.getAllMovements();
+                                stockMovementController.updateMovement();
+                                break;
+                            case 3:
+                                stockMovementController.getAllMovements();
+                                stockMovementController.removeMovement();
+                                break;
+                            case 4:
+                                stockMovementController.getAllMovements();
+                                break;
+                            case 5:
+                                break;
+                            default:
+                                System.out.println("Invalid choice. Please try again.");
+                        }
+                    }
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
