@@ -1,5 +1,7 @@
 
 import controllers.CategoryController;
+import controllers.ProductController;
+import controllers.SupplierController;
 import models.Admin;
 import controllers.AdminController;
 import utils.DisplayUtils;
@@ -15,7 +17,10 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         AdminController adminController = AdminController.getInstance();
+
         CategoryController categoryController = CategoryController.getInstance();
+        ProductController productController = ProductController.getInstance();
+        SupplierController supplierController = SupplierController.getInstance();
         Admin admin;
 
         while (true) {
