@@ -24,15 +24,13 @@ public class SupplierController {
     }
 
     public void addSupplier() {
-
-
         try {
-            System.out.println("Entrer supplier name: ");
+            System.out.println("Enter supplier name: ");
             String name = scanner.nextLine();
-            System.out.println("Entrer supplier phone: ");
+            System.out.println("Enter supplier phone: ");
             String phone = scanner.nextLine();
 
-            System.out.println("Entrer supplier address: ");
+            System.out.println("Enter supplier address: ");
             String address = scanner.nextLine();
 
             supplierService.addSupplier(name, phone, address);
@@ -44,13 +42,8 @@ public class SupplierController {
 
     }
     public void updateSupplier() {
-        System.out.println("Enter supplier ID to update :");
-        int id = Integer.parseInt(scanner.nextLine());
-        Supplier supplier = supplierService.getSupplierById(id);
+        Supplier supplier = getSupplierById();
         if (supplier== null){
-            System.out.println(
-                    "Supplier not found"
-            );
             return;
         }
         System.out.println("Enter new name :");
@@ -59,37 +52,54 @@ public class SupplierController {
         String phone = scanner.nextLine();
         System.out.println("Enter new address :");
         String address = scanner.nextLine();
+
+        if (!name.isEmpty()) {
+            supplier.setName(name);
+        }
+        if (!phone.isEmpty()) {
+            supplier.setPhone(phone);
+        }
+        if (!address.isEmpty()) {
+            supplier.setAddress(address);
+        }
+        if (name.isEmpty() && phone.isEmpty() && address.isEmpty()) {
+            System.out.println("No changes made.");
+            return;
+        }
+
         supplierService.updateSupplier(supplier);
+        System.out.println("Supplier updated successfully.");
     }
 
     public void deleteSupplier() {
-        System.out.println("Enter supplier ID to delete :");
-        int id = Integer.parseInt(scanner.nextLine());
-        Supplier supplier = supplierService.getSupplierById(id);
+        Supplier supplier = getSupplierById();
         if (supplier== null){
-            System.out.println(
-                    "Supplier not found"
-            );
             return;
         }
-        supplierService.deleteSupplier(id);
+        supplierService.deleteSupplier(supplier.getId());
 
     }
 
     public Supplier getSupplierById() {
-        System.out.println("Enter supplier ID to delete :");
+        System.out.println("Enter supplier ID :");
         int id = Integer.parseInt(scanner.nextLine());
         Supplier supplier = supplierService.getSupplierById(id);
         if (supplier== null){
-            System.out.println(
-                    "Supplier not found"
-            );
+            System.out.println("Supplier not found!");
             return null;
         }
-        return supplierService.getSupplierById(id);
+        return supplier;
     }
 
-    public ArrayList<Supplier> listSuppliers() {
-        return supplierService.listSuppliers();
+    public void listSuppliers() {
+        ArrayList<Supplier> suppliers = supplierService.listSuppliers();
+        if (suppliers.isEmpty()) {
+            System.out.println("No suppliers found.");
+        } else {
+            System.out.println("List of suppliers:");
+            for (Supplier supplier : suppliers) {
+                System.out.println(supplier);
+            }
+        }
     }
 }
