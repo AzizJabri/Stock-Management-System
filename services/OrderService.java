@@ -3,6 +3,7 @@ package services;
 import interfaces.IOrderService;
 import models.Customer;
 import models.Order;
+import repositories.CustomerRepository;
 import repositories.OrderRepository;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class OrderService implements IOrderService {
     public void updateOrder(Order order) {
         try {
             // Check if customer exists
-            Customer customer = customerRepository.getById(order.getCustomerId());
+            Customer customer = customerRepository.getById(order.getCustomer_id());
             if (customer == null) {
                 System.out.println("Customer not found");
                 return;
