@@ -33,6 +33,16 @@ public class Product {
         this.id = id;
     }
 
+    public Product( int category_id, String name, String description, float price, int quantity_in_stock, int supplier_id) {
+
+        this.category_id = category_id;
+        this.name = name;
+        this.description = description;
+        this.quantity_in_stock = quantity_in_stock;
+        this.price = price;
+        this.supplier_id = supplier_id;
+    }
+
     // Getters
     public int getId() {
         return id;
