@@ -5,9 +5,10 @@ import models.Customer;
 import java.util.ArrayList;
 
 public interface ICustomerService {
-    ArrayList<Customer> list();
-    void add(Customer customer);
-    Customer getById(int id);
-    void update(int id, Customer customer);
-    void delete(int id);
+    ArrayList<Customer> listCustomers();
+    void addCustomer(Customer customer);
+    Customer getCustomerById(int id);
+    Customer getCustomerByEmail(String email);
+    void updateCustomer(Customer customer);
+    void deleteCustomer(int id);
 }
