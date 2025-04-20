@@ -10,6 +10,12 @@ public class Customer extends User {
         this.email = email;
     }
 
+    public Customer(int id, String fullName, int age, int phoneNumber, String address, String email) {
+        super(id, fullName, age, phoneNumber);
+        this.address = address;
+        this.email = email;
+    }
+
     // Getters and Setters
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
