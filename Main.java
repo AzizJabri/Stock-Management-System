@@ -120,7 +120,27 @@ public class Main {
                     break;
                 case 4:
                     DisplayUtils.displayManageProductsMenu();
-                    break;
+                    sub_choice = Integer.parseInt(scanner.nextLine());
+                    switch (sub_choice) {
+                        case 1:
+                            productController.addProduct();
+                            break;
+                        case 2:
+                            productController.listProducts();
+                            productController.updateProduct();
+                            break;
+                        case 3:
+                            productController.listProducts();
+                            productController.deleteProduct();
+                            break;
+                        case 4:
+                            productController.listProducts();
+                            break;
+                        case 5:
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Please try again.");
+                    }
                 case 5:
                     DisplayUtils.displayManageOrdersMenu();
                     break;
