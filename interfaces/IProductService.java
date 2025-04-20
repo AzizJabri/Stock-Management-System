@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public interface IProductService {
     void addProduct(int category_id, String name, String description, float price,
-                    int quantity_in_stock, int supplier_id, java.util.Date created_at,
-                    java.util.Date updated_at);
+                    int quantity_in_stock, int supplier_id);
 
     void updateProduct(Product product);
 
