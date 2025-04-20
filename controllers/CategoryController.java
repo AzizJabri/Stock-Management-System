@@ -10,9 +10,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     private CategoryController() {
-        if (instance == null) {
-            instance = this;
-        }
+
         this.categoryService = CategoryService.getInstance();
     }
 

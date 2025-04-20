@@ -12,9 +12,7 @@ public class OrderController {
     private final OrderService orderService;
 
     private OrderController() {
-        if (instance == null) {
-            instance = this;
-        }
+
         this.orderService = OrderService.getInstance();
     }
 
@@ -27,7 +25,7 @@ public class OrderController {
 
     public void addOrder(int customerId, String status, double totalAmount) {
         Date now = new Date();
-        orderService.createOrder(customerId, now, status, totalAmount);
+        orderService.addOrder(customerId, now, status, totalAmount);
     }
 
     public void updateOrder(Order order) {
@@ -35,7 +33,7 @@ public class OrderController {
     }
 
     public void deleteOrder(int orderId) {
-        orderService.cancelOrder(orderId);
+        orderService.deleteOrder(orderId);
     }
 
     public Order getOrderById(int orderId) {
@@ -43,6 +41,6 @@ public class OrderController {
     }
 
     public ArrayList<Order> listAllOrders() {
-        return orderService.getAllOrders();
+        return orderService.listAllOrders();
     }
 }

@@ -12,9 +12,7 @@ public class ProductController {
     private final ProductService productService;
 
     private ProductController() {
-        if (instance == null) {
-            instance = this;
-        }
+
         this.productService = ProductService.getInstance();
     }
 

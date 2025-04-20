@@ -10,9 +10,6 @@ public class SupplierController {
     private final SupplierService supplierService;
 
     private SupplierController() {
-        if (instance == null) {
-            instance = this;
-        }
         this.supplierService = SupplierService.getInstance();
     }
 
