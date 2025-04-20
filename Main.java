@@ -68,7 +68,30 @@ public class Main {
                     }
                     break;
                 case 2:
-                    DisplayUtils.displayManageCategoriesMenu();
+                    while (sub_choice != 5) {
+                        DisplayUtils.displayManageCategoriesMenu();
+                        sub_choice = Integer.parseInt(scanner.nextLine());
+                        switch (sub_choice) {
+                            case 1:
+                                categoryController.addCategory();
+                                break;
+                            case 2:
+                                categoryController.listCategories();
+                                categoryController.updateCategory();
+                                break;
+                            case 3:
+                                categoryController.listCategories();
+                                categoryController.deleteCategory();
+                                break;
+                            case 4:
+                                categoryController.listCategories();
+                                break;
+                            case 5:
+                                break;
+                            default:
+                                System.out.println("Invalid choice. Please try again.");
+                        }
+                    }
                     break;
                 case 3:
                     DisplayUtils.displayManageSuppliersMenu();
