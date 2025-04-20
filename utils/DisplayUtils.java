@@ -20,6 +20,7 @@ public class DisplayUtils {
         System.out.println("2. Update Admin");
         System.out.println("3. Delete Admin");
         System.out.println("4. List Admins");
+        System.out.println("5. Exit");
     }
 
     public static void displayManageCategoriesMenu() {

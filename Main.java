@@ -10,10 +10,10 @@ import java.util.Scanner;
 public class Main {
     static void createDefaultAdmin() {
         AdminController adminController = AdminController.getInstance();
-        adminController.registerAdmin("admin", "admin123", "Admin User", 22, 123456789);
+        adminController.registerAdmin();
     }
     public static void main(String[] args){
-        createDefaultAdmin();
+        //createDefaultAdmin();
 
         Scanner scanner = new Scanner(System.in);
         AdminController adminController = AdminController.getInstance();
@@ -21,22 +21,10 @@ public class Main {
         CategoryController categoryController = CategoryController.getInstance();
         ProductController productController = ProductController.getInstance();
         SupplierController supplierController = SupplierController.getInstance();
-        Admin admin;
+        Admin admin = null;
 
-        while (true) {
-            System.out.print("Enter username: ");
-            String username = scanner.nextLine();
-            System.out.print("Enter password: ");
-            String password = scanner.nextLine();
-
-            admin = adminController.loginAdmin(username, password);
-            if (admin == null) {
-                System.out.println("Invalid username or password. Please try again.");
-            } else {
-                System.out.println("Login successful!");
-                break;
-
-            }
+        while (admin == null) {
+            admin = adminController.loginAdmin();
         }
         // application logic
         //1 manage admins
@@ -48,12 +36,36 @@ public class Main {
         //7 manage stock movements
 
         int choice = 0;
+        int sub_choice = 0;
         while (choice > 8 || choice < 1) {
             DisplayUtils.diplayAdminDashboard(admin);
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice){
                 case 1:
-                    DisplayUtils.displayManageAdminMenu();
+                    while (sub_choice != 5) {
+                        DisplayUtils.displayManageAdminMenu();
+                        sub_choice = Integer.parseInt(scanner.nextLine());
+                        switch (sub_choice) {
+                            case 1:
+                                adminController.registerAdmin();
+                                break;
+                            case 2:
+                                adminController.listAdmins();
+                                adminController.updateAdmin();
+                                break;
+                            case 3:
+                                adminController.listAdmins();
+                                adminController.deleteAdmin();
+                                break;
+                            case 4:
+                                adminController.listAdmins();
+                                break;
+                            case 5:
+                                break;
+                            default:
+                                System.out.println("Invalid choice. Please try again.");
+                        }
+                    }
                     break;
                 case 2:
                     DisplayUtils.displayManageCategoriesMenu();
