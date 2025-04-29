@@ -27,11 +27,10 @@ public class SupplierRepository {
     public void save(Supplier supplier) throws SQLException {
 
 
-        String sql = "INSERT INTO supplier (id, name, phone,address) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO supplier (name, phone,address) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, supplier.getId());
-            stmt.setString(2, supplier.getName());
-            stmt.setString(3, supplier.getPhone());
+            stmt.setString(1, supplier.getName());
+            stmt.setString(2, supplier.getPhone());
             stmt.setString(3, supplier.getAddress());
             stmt.executeUpdate();
         }

@@ -31,15 +31,7 @@ public class ProductService implements IProductService {
     public void addProduct(int category_id, String name, String description, float price,
                            int quantity_in_stock, int supplier_id) {
         try {
-            // Check if category and supplier exist
-            if (categoryRepository.getById(category_id) == null) {
-                System.out.println("Category not found");
-                return;
-            }
-            if (supplierRepository.getById(supplier_id) == null) {
-                System.out.println("Supplier not found");
-                return;
-            }
+
             Product product = new Product(category_id, name, description, price, quantity_in_stock, supplier_id);
             productRepository.save(product);
         } catch (Exception e) {

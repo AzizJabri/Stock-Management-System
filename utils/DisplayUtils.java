@@ -8,12 +8,12 @@ public class DisplayUtils {
         System.out.println("Welcome to the Dashboard " + admin.getFullName());
         System.out.println("1. Manage Admins");
         System.out.println("2. Manage Categories");
-        System.out.println("4. Manage Suppliers");
-        System.out.println("5. Manage Products");
-        System.out.println("6. Manage Orders");
-        System.out.println("7. Manage Customers");
-        System.out.println("8. Manage Stock Movements");
-        System.out.println("9. Exit");
+        System.out.println("3. Manage Suppliers");
+        System.out.println("4. Manage Products");
+        System.out.println("5. Manage Orders");
+        System.out.println("6. Manage Customers");
+        System.out.println("7. Manage Stock Movements");
+        System.out.println("8. Exit");
     }
 
     public static void displayManageAdminMenu() {

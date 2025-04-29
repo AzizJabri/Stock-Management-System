@@ -34,6 +34,7 @@ public class SupplierController {
             String address = scanner.nextLine();
 
             supplierService.addSupplier(name, phone, address);
+            System.out.println("Supplier added successfully.");
 
         } catch (Exception e) {
             System.out.println("Error while a adding supplier: " + e.getMessage());
@@ -77,6 +78,7 @@ public class SupplierController {
             return;
         }
         supplierService.deleteSupplier(supplier.getId());
+        System.out.println("Supplier deleted successfully.");
 
     }
 
@@ -98,7 +100,11 @@ public class SupplierController {
         } else {
             System.out.println("List of suppliers:");
             for (Supplier supplier : suppliers) {
-                System.out.println(supplier);
+                System.out.println("ID: " + supplier.getId() +
+                        ", Name: " + supplier.getName() +
+                        ", Phone: " + supplier.getPhone() +
+                        ", Address: " + supplier.getAddress());
+                System.out.println("--------------------------------------------------");
             }
         }
     }

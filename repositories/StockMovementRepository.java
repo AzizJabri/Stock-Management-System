@@ -1,5 +1,6 @@
 package repositories;
 
+import models.MovementType;
 import models.StockMovement;
 import database.DBConnection;
 import java.sql.*;
@@ -26,7 +27,7 @@ public class StockMovementRepository {
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, movement.getProduct_id());
             stmt.setInt(2, movement.getQuantity());
-            stmt.setString(3, movement.getMovement_type());
+            stmt.setString(3, movement.getMovement_type().name());
             stmt.setTimestamp(4, new Timestamp(movement.getDate().getTime()));
             stmt.setString(5, movement.getReference());
             stmt.executeUpdate();
@@ -48,7 +49,7 @@ public class StockMovementRepository {
                 return new StockMovement(
                         rs.getInt("product_id"),
                         rs.getInt("quantity"),
-                        rs.getString("movement_type"),
+                        MovementType.valueOf(rs.getString("movement_type")),
                         new Date(rs.getTimestamp("date").getTime()),
                         rs.getString("reference")
                 ) {{
@@ -68,7 +69,7 @@ public class StockMovementRepository {
                 StockMovement movement = new StockMovement(
                         rs.getInt("product_id"),
                         rs.getInt("quantity"),
-                        rs.getString("movement_type"),
+                        MovementType.valueOf(rs.getString("movement_type")),
                         new Date(rs.getTimestamp("date").getTime()),
                         rs.getString("reference")
                 );
@@ -92,7 +93,7 @@ public class StockMovementRepository {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, movement.getProduct_id());
             stmt.setInt(2, movement.getQuantity());
-            stmt.setString(3, movement.getMovement_type());
+            stmt.setString(3, movement.getMovement_type().toString());
             stmt.setTimestamp(4, new Timestamp(movement.getDate().getTime()));
             stmt.setString(5, movement.getReference());
             stmt.setInt(6, movement.getId());

@@ -6,11 +6,11 @@ public class StockMovement {
     private int id;
     private int product_id;
     private int quantity;
-    private String movement_type;
+    private Enum<MovementType> movement_type;
     private Date date;
     private String reference;
 
-    public StockMovement(int product_id, int quantity, String movement_type, Date date, String reference) {
+    public StockMovement(int product_id, int quantity, Enum<MovementType> movement_type, Date date, String reference) {
         this.product_id = product_id;
         this.quantity = quantity;
         this.movement_type = movement_type;
@@ -30,7 +30,7 @@ public class StockMovement {
         return quantity;
     }
 
-    public String getMovement_type() {
+    public Enum<MovementType> getMovement_type() {
         return movement_type;
     }
 
@@ -54,7 +54,7 @@ public class StockMovement {
         this.quantity = quantity;
     }
 
-    public void setMovement_type(String movement_type) {
+    public void setMovement_type(Enum<MovementType> movement_type) {
         this.movement_type = movement_type;
     }
 

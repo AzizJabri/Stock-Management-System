@@ -101,7 +101,7 @@ public class ProductRepository {
             stmt.setFloat(4, product.getPrice());
             stmt.setInt(5, product.getQuantity_in_stock());
             stmt.setInt(6, product.getSupplier_id());
-            stmt.setDate(7, new java.sql.Date(product.getUpdated_at().getTime()));
+            stmt.setDate(7, new java.sql.Date(System.currentTimeMillis()));
             stmt.setInt(8, product.getId());
             stmt.executeUpdate();
         }

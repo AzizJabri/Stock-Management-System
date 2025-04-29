@@ -41,6 +41,8 @@ public class Product {
         this.quantity_in_stock = quantity_in_stock;
         this.price = price;
         this.supplier_id = supplier_id;
+        this.created_at = new Date();
+        this.updated_at = new Date();
     }
 
     // Getters

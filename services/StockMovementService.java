@@ -1,11 +1,15 @@
 package services;
 
 import interfaces.IStockMovementService;
+import models.MovementType;
+import models.Product;
 import models.StockMovement;
 import repositories.ProductRepository;
 import repositories.StockMovementRepository;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static models.MovementType.*;
 
 public class StockMovementService implements IStockMovementService {
     private static StockMovementService instance;
@@ -26,15 +30,34 @@ public class StockMovementService implements IStockMovementService {
     }
 
     @Override
-    public void addStockMovement(int productId, int quantity, String movementType, String reference) {
+    public void addStockMovement(int productId, int quantity, Enum<MovementType> movementType, String reference) {
         try {
-            // Check if product exists
-            if (productRepository.getById(productId) == null) {
-                System.out.println("Product not found");
-                return;
-            }
+            Product product = productRepository.getById(productId);
             StockMovement movement = new StockMovement(productId, quantity, movementType, new Date(), reference);
+
+            switch (movementType) {
+                case INCOMING:
+                    product.setQuantity_in_stock(product.getQuantity_in_stock() + quantity);
+                    productRepository.update(product);
+                    break;
+                case OUTGOING:
+                    if (product.getQuantity_in_stock() >= quantity) {
+                        product.setQuantity_in_stock(product.getQuantity_in_stock() - quantity);
+                        productRepository.update(product);
+                    } else {
+                        System.out.println("Insufficient stock for outgoing movement.");
+                    }
+                    break;
+                case ADJUSTMENT:
+                    product.setQuantity_in_stock(quantity);
+                    productRepository.update(product);
+                    break;
+                default:
+                    System.out.println("Invalid movement type.");
+                    return;
+            }
             stockMovementRepository.save(movement);
+            
         } catch (Exception e) {
             System.out.println("Error adding stock movement: " + e.getMessage());
         }
