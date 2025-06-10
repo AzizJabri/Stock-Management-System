@@ -16,6 +16,8 @@ public class Main {
     static OrderController orderController = OrderController.getInstance();
     static OrderItemController orderItemController = OrderItemController.getInstance();
 
+    static CustomerController customerController = CustomerController.getInstance();
+
     public static void main(String[] args) {
         Admin admin = null;
         while (admin == null) {
@@ -32,7 +34,7 @@ public class Main {
                 case 3 -> manageSuppliers();
                 case 4 -> manageProducts();
                 case 5 -> manageOrders();
-                case 6 -> DisplayUtils.displayManageCustomersMenu(); // Placeholder
+                case 6 -> manageCustomers();
                 case 7 -> manageStockMovements();
                 case 8 -> {
                     System.out.println("Goodbye!");
@@ -169,6 +171,28 @@ public class Main {
                     stockMovementController.removeMovement();
                 }
                 case 4 -> stockMovementController.getAllMovements();
+                case 5 -> System.out.println("Returning to main menu...");
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 5);
+    }
+
+    private static void manageCustomers() {
+        int choice;
+        do {
+            DisplayUtils.displayManageCustomersMenu();
+            choice = getIntInput("Enter your choice:");
+            switch (choice) {
+                case 1 -> customerController.addCustomer();
+                case 2 -> {
+                    customerController.listCustomers();
+                    customerController.updateCustomer();
+                }
+                case 3 -> {
+                    customerController.listCustomers();
+                    customerController.deleteCustomer();
+                }
+                case 4 -> customerController.listCustomers();
                 case 5 -> System.out.println("Returning to main menu...");
                 default -> System.out.println("Invalid choice. Please try again.");
             }

@@ -86,6 +86,16 @@ public class OrderItemService implements IOrderItemService {
     }
 
     @Override
+    public ArrayList<OrderItem> getOrderItemsByOrderId(int orderId) {
+        try {
+            return orderItemRepository.getByOrderId(orderId);
+        } catch (Exception e) {
+            System.out.println("Error getting order items by order ID: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
     public ArrayList<OrderItem> listAllOrderItems() {
         try {
             return orderItemRepository.getAll();

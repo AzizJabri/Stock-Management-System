@@ -8,5 +8,7 @@ public interface IOrderItemService {
     void updateOrderItem(OrderItem orderItem);
     void deleteOrderItem(int id);
     OrderItem getOrderItemById(int id);
+
+    ArrayList<OrderItem> getOrderItemsByOrderId(int orderId);
     ArrayList<OrderItem> listAllOrderItems();
 }

@@ -60,4 +60,15 @@ public class Order {
     public void setTotal_amount(double total_amount) {
         this.total_amount = total_amount;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customer_id=" + customer_id +
+                ", order_date=" + order_date +
+                ", status='" + status + '\'' +
+                ", total_amount=" + total_amount +
+                '}';
+    }
 }

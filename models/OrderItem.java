@@ -58,4 +58,14 @@ public class OrderItem {
     public void setUnit_price(double unit_price) {
         this.unit_price = unit_price;
     }
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", order_id=" + order_id +
+                ", product_id=" + product_id +
+                ", quantity=" + quantity +
+                ", unit_price=" + unit_price +
+                '}';
+    }
 }

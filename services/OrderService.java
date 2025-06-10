@@ -28,18 +28,19 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void addOrder(int customerId, Date orderDate, String status, double totalAmount) {
+    public int addOrder(int customerId, Date orderDate, String status, double totalAmount) {
         try {
             // Check if customer exists
             Customer customer = customerRepository.getById(customerId);
             if (customer == null) {
                 System.out.println("Customer not found");
-                return;
+                return -1;
             }
             Order order = new Order(customerId, orderDate, status, totalAmount);
-            orderRepository.save(order);
+            return orderRepository.save(order);
         } catch (Exception e) {
             System.out.println("Error adding Order: " + e.getMessage());
+            return -1;
         }
     }
 

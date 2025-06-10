@@ -129,7 +129,7 @@ public class StockMovementController {
     }
 
     public StockMovement getMovementDetails() {
-        System.out.println("Enter StockMovement ID to delete :");
+        System.out.println("Enter StockMovement ID:");
         int movementId = Integer.parseInt(scanner.nextLine());
         StockMovement movement = stockMovementService.getStockMovementById(movementId);
         if (movement == null) {

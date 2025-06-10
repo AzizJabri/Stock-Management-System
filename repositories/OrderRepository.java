@@ -20,7 +20,7 @@ public class OrderRepository {
         return instance;
     }
 
-    public void save(Order order) throws SQLException {
+    public int save(Order order) throws SQLException {
         String sql = "INSERT INTO orders (customer_id, order_date, status, total_amount) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, order.getCustomer_id());
@@ -34,6 +34,7 @@ public class OrderRepository {
                     order.setId(rs.getInt(1));
                 }
             }
+            return order.getId();
         }
     }
 
